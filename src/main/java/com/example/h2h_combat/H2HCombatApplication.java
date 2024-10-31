@@ -1,13 +1,13 @@
-package com.example.hand_to_hand_combat;
+package com.example.h2h_combat;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HandToHandCombatApplication {
+public class H2HCombatApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HandToHandCombatApplication.class, args);
+		SpringApplication.run(H2HCombatApplication.class, args);
 	}
 
 }

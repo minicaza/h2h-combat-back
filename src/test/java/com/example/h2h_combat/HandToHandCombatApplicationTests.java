@@ -1,4 +1,4 @@
-package com.example.hand_to_hand_combat;
+package com.example.h2h_combat;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

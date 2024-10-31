@@ -1,8 +1,8 @@
-package com.example.hand_to_hand_combat.application;
+package com.example.h2h_combat.application;
 
-import com.example.hand_to_hand_combat.domain.Move;
-import com.example.hand_to_hand_combat.domain.Result;
-import com.example.hand_to_hand_combat.domain.Game;
+import com.example.h2h_combat.domain.Move;
+import com.example.h2h_combat.domain.Result;
+import com.example.h2h_combat.domain.Game;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;

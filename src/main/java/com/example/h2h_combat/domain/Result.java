@@ -1,4 +1,4 @@
-package com.example.hand_to_hand_combat.domain;
+package com.example.h2h_combat.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

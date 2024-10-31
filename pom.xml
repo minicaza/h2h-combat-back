@@ -11,7 +11,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>h2h-combat-back</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Hand-to-Hand Combat</name>
+	<name>H2H Combat</name>
 	<description>The Rock, Paper, Scissors game</description>
 	<url/>
 	<licenses>
@@ -88,6 +88,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>3.3.5</version>
 				<configuration>
 					<excludes>
 						<exclude>

@@ -1,8 +1,8 @@
-package com.example.hand_to_hand_combat.adapter.in.web.GameController;
+package com.example.h2h_combat.adapter.in.web.GameController;
 
-import com.example.hand_to_hand_combat.application.GameService;
-import com.example.hand_to_hand_combat.domain.Move;
-import com.example.hand_to_hand_combat.domain.Result;
+import com.example.h2h_combat.application.GameService;
+import com.example.h2h_combat.domain.Move;
+import com.example.h2h_combat.domain.Result;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
