@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>hand-to-hand-combat</artifactId>
+	<artifactId>h2h-combat-back</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Hand-to-Hand Combat</name>
 	<description>The Rock, Paper, Scissors game</description>
