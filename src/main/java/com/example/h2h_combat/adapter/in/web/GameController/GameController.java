@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/games")
+@RequestMapping("/h2h-combat")
 public class GameController {
 
     private final GameService gameService;

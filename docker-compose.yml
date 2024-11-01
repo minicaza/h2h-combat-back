@@ -12,6 +12,30 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+  elasticsearch:
+    image: elasticsearch:8.4.0
+    container_name: elasticsearch
+    ports:
+      - "9200:9200"
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - xpack.security.enabled=false
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    networks:
+      - elastic_network
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9200/" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
 volumes:
   postgres_data:
+  esdata:
+    driver: local
+
+networks:
+  elastic_network:
+    driver: bridge

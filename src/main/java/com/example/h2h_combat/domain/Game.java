@@ -1,11 +1,13 @@
 package com.example.h2h_combat.domain;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 @AllArgsConstructor
-@Getter
+@Document(indexName = "games")
 public class Game {
+    private String id;
+    private String title;
     private Move playerMove;
     private Move computerMove;
 
