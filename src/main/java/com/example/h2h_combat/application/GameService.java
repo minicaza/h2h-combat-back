@@ -1,9 +1,11 @@
 package com.example.h2h_combat.application;
 
 import com.example.h2h_combat.adapter.out.repository.ElasticGameRepository;
+import com.example.h2h_combat.adapter.out.repository.GameJpaRepository;
 import com.example.h2h_combat.domain.Game;
 import com.example.h2h_combat.domain.Move;
 import com.example.h2h_combat.domain.Result;
+import com.example.h2h_combat.domain.mappers.GamePostgreMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,15 +16,26 @@ public class GameService {
 
     private int gameCount;
     private final Random random = new Random();
+    private final ElasticGameRepository elasticGameRepository;
+    private final GameJpaRepository repository;
+    private final GamePostgreMapper mapper;
+
     @Autowired
-    private ElasticGameRepository elasticGameRepository;
+    public GameService(ElasticGameRepository elasticGameRepository,
+                       GameJpaRepository repository,
+                       GamePostgreMapper mapper) {
+        this.elasticGameRepository = elasticGameRepository;
+        this.repository = repository;
+        this.mapper = mapper;
+    }
 
     public Game play(Move playerMove) {
         gameCount++;
         Move computerMove = getRandomMove();
-        Game game = new Game("game" + gameCount, "game", playerMove, computerMove, null);
+        Game game = new Game(gameCount, "Game "+gameCount, playerMove, computerMove, null);
         determineWinner(game);
         elasticGameRepository.save(game);
+        repository.save(mapper.toModel(game));
         return game;
     }
 

@@ -10,7 +10,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 @Setter
 @Document(indexName = "games")
 public class Game {
-    private String id;
+    private int id;
     private String title;
     private Move playerMove;
     private Move computerMove;
