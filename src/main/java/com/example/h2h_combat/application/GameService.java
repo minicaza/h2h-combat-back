@@ -6,12 +6,16 @@ import com.example.h2h_combat.domain.Game;
 import com.example.h2h_combat.domain.Move;
 import com.example.h2h_combat.domain.Result;
 import com.example.h2h_combat.domain.mappers.GamePostgreMapper;
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
 
 @Service
+@Slf4j
+@Getter
 public class GameService {
 
     private int gameCount;
@@ -34,17 +38,20 @@ public class GameService {
         Move computerMove = getRandomMove();
         Game game = new Game(gameCount, "Game "+gameCount, playerMove, computerMove, null);
         determineWinner(game);
+        log.info("Winner: [{}]", game.getResult().getWinner());
         elasticGameRepository.save(game);
         repository.save(mapper.toModel(game));
         return game;
     }
 
     private Move getRandomMove() {
+        log.info("Getting random move for CPU.");
         Move[] moves = Move.values();
         return moves[random.nextInt(moves.length)];
     }
 
     private void determineWinner(Game game) {
+        log.info("Calculating the winner...");
         Result result = new Result();
         Move playerMove = game.getPlayerMove();
         Move computerMove = game.getComputerMove();
