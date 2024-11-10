@@ -61,10 +61,10 @@ public class GameService {
                 (playerMove == Move.PAPER && computerMove == Move.ROCK) ||
                 (playerMove == Move.SCISSORS && computerMove == Move.PAPER)){
                     result.setMessage("Player wins!");
-                    result.setWinner("Player");
+                    result.setWinner("player");
         } else{
             result.setMessage("CPU wins!");
-            result.setWinner("CPU");
+            result.setWinner("cpu");
         }
         game.setResult(result);
     }
