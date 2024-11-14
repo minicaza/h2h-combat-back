@@ -3,6 +3,7 @@ package com.example.h2h_combat.application;
 import com.example.h2h_combat.adapter.out.repository.ElasticGameRepository;
 import com.example.h2h_combat.adapter.out.repository.GameJpaRepository;
 import com.example.h2h_combat.domain.Game;
+import com.example.h2h_combat.domain.GameMO;
 import com.example.h2h_combat.domain.Move;
 import com.example.h2h_combat.domain.Result;
 import com.example.h2h_combat.domain.mappers.GamePostgreMapper;
@@ -11,7 +12,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -42,6 +46,12 @@ public class GameService {
         elasticGameRepository.save(game);
         repository.save(mapper.toModel(game));
         return game;
+    }
+
+    public List<Game> getAllGames(){
+        return repository.findAll().stream()
+                .map(mapper::fromModel)
+                .collect(Collectors.toList());
     }
 
     private Move getRandomMove() {
