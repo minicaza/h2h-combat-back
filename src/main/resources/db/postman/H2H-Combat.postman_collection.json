@@ -1,0 +1,210 @@
+{
+	"info": {
+		"_postman_id": "494e11e8-d4b4-4dcf-803c-71dd35a5974f",
+		"name": "H2H-Combat",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16690607"
+	},
+	"item": [
+		{
+			"name": "Elastic -  Create index",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"mappings\": {\n    \"properties\": {\n      \"title\": { \"type\": \"text\" },\n      \"content\": { \"type\": \"text\" }\n    }\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9200/games",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"games"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Game - New Match",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/plain"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "ROCK",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/h2h-combat/play",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"h2h-combat",
+						"play"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Elastic - Search all",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "localhost:9200/games/_search?pretty",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"games",
+						"_search"
+					],
+					"query": [
+						{
+							"key": "pretty",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Elastic - Search by GameId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9200/games/_doc/:gameId?pretty",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"games",
+						"_doc",
+						":gameId"
+					],
+					"query": [
+						{
+							"key": "pretty",
+							"value": null
+						}
+					],
+					"variable": [
+						{
+							"key": "gameId",
+							"value": "game1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Elastic - Active indices",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9200/_cat/indices?v",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"_cat",
+						"indices"
+					],
+					"query": [
+						{
+							"key": "v",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Game - Get History",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/h2h-combat/history",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"h2h-combat",
+						"history"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Game - Get image by name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/h2h-combat/images/:imageName",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"h2h-combat",
+						"images",
+						":imageName"
+					],
+					"variable": [
+						{
+							"key": "imageName",
+							"value": "app.png"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
