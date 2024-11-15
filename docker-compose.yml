@@ -1,9 +1,33 @@
 version: '3.8'
 
 services:
+  springboot-app:
+    image: openjdk:17-jdk-slim
+    depends_on:
+      postgres:
+        condition: service_healthy
+    container_name: springboot-app
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./target/h2h-combat-back-0.0.1-SNAPSHOT.jar:/app/h2h-combat-back.jar
+    command: [ "java", "-jar", "/app/h2h-combat-back.jar" ]
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/rps_jcazalil
+      - SPRING_DATASOURCE_USERNAME=abc
+      - SPRING_DATASOURCE_PASSWORD=abc
+      - MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE=*
+      - MANAGEMENT_ENDPOINT_HEALTH_SHOW_DETAILS=always
+      - MANAGEMENT_ENDPOINT_PROMETHEUS_ENABLED=true
+    networks:
+      - monitoring
   postgres:
     image: postgres:latest
     container_name: postgres_db
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "abc", "-d", "rps_jcazalil" ]
+      interval: 10s
+      retries: 5
     environment:
       POSTGRES_DB: rps_jcazalil
       POSTGRES_USER: abc
@@ -12,6 +36,9 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - monitoring
+
   elasticsearch:
     image: elasticsearch:8.4.0
     container_name: elasticsearch
@@ -25,17 +52,37 @@ services:
       - esdata:/usr/share/elasticsearch/data
     networks:
       - elastic_network
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:9200/" ]
-      interval: 30s
-      timeout: 10s
-      retries: 5
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana-data:/var/lib/grafana
+    networks:
+      - monitoring
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - monitoring
 
 volumes:
   postgres_data:
   esdata:
-    driver: local
+  grafana-data:
+  prometheus-data:
 
 networks:
   elastic_network:
+    driver: bridge
+  monitoring:
     driver: bridge

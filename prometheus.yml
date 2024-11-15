@@ -1,0 +1,26 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'springboot-app'
+    scrape_interval: 15s
+    metrics_path: /actuator/prometheus
+    static_configs:
+      - targets: ['localhost:8080']
+
+  - job_name: 'transfer-service'
+    scrape_interval: 2s
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['host.docker.internal:9101']
+
+  - job_name: 'flyway'
+    scrape_interval: 15s
+    metrics_path: /flyway
+    static_configs:
+      - targets: [ 'localhost:5432' ]
