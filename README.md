@@ -1,7 +1,7 @@
 # H2H Combat
 
 ## Introduction
-The Rock, Paper, Scissors game application built using Spring Boot.
+H2H Combat is a Spring Boot-based web application for playing Rock, Paper, Scissors. It allows users to play against a computer opponent, view past games, and explore game history. It integrates with Elasticsearch for game storage and uses PostgreSQL for relational data.
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -19,7 +19,7 @@ The Rock, Paper, Scissors game application built using Spring Boot.
 ## Features
 - Play a game of Rock, Paper, Scissors
 - View game history
-- Actuator endpoints for monitoring _Not implemented 100%_
+- Actuator endpoints for monitoring _(currently partial, with basic health checks and metrics exposed)_
 - Elasticsearch integration for game storage
 - PostgreSQL for relational data storage
 
@@ -32,7 +32,7 @@ The Rock, Paper, Scissors game application built using Spring Boot.
 ## Installation
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/h2h-combat-back.git
+    git clone https://github.com/minicaza/h2h-combat-back.git
     ```
 2. Navigate to the project directory:
     ```bash
@@ -72,7 +72,9 @@ spring.flyway.password=yourpassword
 
 ## Usage
 ### API Endpoints
-List and describe the available API endpoints.
+List and describe the available API endpoints. 
+
+To test the endpoints easily, you can import the provided Postman collection located at: `src/main/resources/db/postman/H2H-Combat.postman_collection.json
 
 #### Example:
 - `POST /h2h-combat/play`: Play a game of Rock, Paper, Scissors.
@@ -116,6 +118,13 @@ List and describe the available API endpoints.
     }
   ]
   ´´´
+
+### Monitoring and metrics
+
+To monitor the application's health and performance, the following endpoints are available:
+
+- Grafana: http://localhost:3000/ with user/pass by default admin
+- Prometheus: http://localhost:9090/targets?search=
 
 ## Testing
 1. **Unit Tests**:
